@@ -7,8 +7,7 @@ function App() {
   const [sender, setSender] = useState('');
   const [recipient, setRecipient] = useState('');
   const [quantity, setQuantity] = useState('');
-  const [blocks, setBlocks] = useState([demoCoin.lastElement]);
-
+  const [blocks, setBlocks] = useState([demoCoin.obtainLatestBlock()]);
 
   const handleChange = (e) => {
     e.target.name === 'sender' ? setSender(e.target.value) :
@@ -18,13 +17,14 @@ function App() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    demoCoin.addNewBlock(new CryptoBlock(new Date(), { sender, recipient, quantity }));
-    let newElement = demoCoin.lastElement;
+    demoCoin.addNewBlock(new CryptoBlock(new Date(), { sender, recipient, quantity: Number(quantity) }));
+    let newElement = demoCoin.obtainLatestBlock();
     setBlocks(arr => [...arr, newElement]);
   }
 
   return (
     <section className="App">
+
       <form className="App-form" onSubmit={e => { handleSubmit(e) }}>
         <label htmlFor='sender'>sender</label>
         <input
@@ -52,12 +52,9 @@ function App() {
           id='quantity' />
         <button className='Add-block'>add block</button>
       </form>
-      <button onClick={() => {
-        console.log(demoCoin.checkChainValidity());
-        demoCoin.blockchain[1].hash = 1;
-        console.log(demoCoin.checkChainValidity());
-      }}>check</button>
+     
       <Blockchain data={blocks} />
+
     </section>
   );
 }

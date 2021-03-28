@@ -1,0 +1,19 @@
+.block {
+    background: #24bd87;
+    margin: 15px;
+    border-radius: 7px;
+    flex: 0 0 auto;
+    color: white;
+    font-size: 15px;
+}
+
+.block p {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px 15px;
+}
+.block p label{
+    padding: 0 5px;
+}

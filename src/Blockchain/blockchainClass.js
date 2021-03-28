@@ -1,7 +1,7 @@
 const SHA256 = require("crypto-js/sha256");
 class CryptoBlock {
     constructor(timestamp, data, precedingHash = " ") {
-        this.index = 0;
+        this.blockIndex = 0;
         this.timestamp = timestamp;
         this.data = data;
         this.precedingHash = precedingHash;
@@ -9,13 +9,13 @@ class CryptoBlock {
         this.nonce = 0;
     }
 
-    computeHash(index) {
-        return SHA256(index + this.precedingHash + this.timestamp + JSON.stringify(this.data) + this.nonce)
+    computeHash(blockIndex) {
+        return SHA256(blockIndex + this.precedingHash + this.timestamp + JSON.stringify(this.data) + this.nonce)
             .toString();
     }
 
-    proofOfWork(difficulty, index) {
-        this.index = index;
+    proofOfWork(difficulty, blockIndex) {
+        this.blockIndex = blockIndex;
         while (this.hash.substring(0, difficulty) !== Array(difficulty + 1).join("0")) {
             this.nonce++;
             this.hash = this.computeHash();
@@ -30,12 +30,13 @@ class CryptoBlockchain {
         this.difficulty = 1;
     }
     startGenesisBlock() {
-        return new CryptoBlock(0, new Date(), "0", "0");
+        return new CryptoBlock(new Date(), 0, "0", "0");
     }
     obtainLatestBlock() {
         return this.blockchain[this.blockchain.length - 1];
     }
     addNewBlock(newBlock) {
+        if(!newBlock.data.quantity) newBlock.data.quantity = 0;
         newBlock.precedingHash = this.obtainLatestBlock().hash;
         newBlock.proofOfWork(this.difficulty, this.blockchain.length);
         this.blockchain.push(newBlock);
@@ -49,9 +50,7 @@ class CryptoBlockchain {
         }
         return true;
     }
-    get lastElement() {
-        return this.blockchain[this.blockchain.length - 1];
-    }
+
 }
 let demoCoin = new CryptoBlockchain();
 
