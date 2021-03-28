@@ -1,0 +1,30 @@
+.App {
+  text-align: center;
+}
+
+.App-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.Block-input {
+  width: 250px;
+  border-radius: 7px;
+  border: 0;
+  padding: 5px;
+}
+
+.Add-block {
+  width: 200px;
+  margin-top: 1%;
+  background: #24bd87;
+  border-radius: 7px;
+  border: 0;
+  padding: 5px;
+  color: white;
+  font-weight: 600;
+}
+

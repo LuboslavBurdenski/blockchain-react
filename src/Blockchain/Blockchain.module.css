@@ -1,0 +1,36 @@
+.chain {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    height: 400px;
+    border-top: 2px solid white;
+    border-bottom: 2px solid white;
+    border-left: 2px solid white;
+    margin-top: 100px;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+    align-items: center;
+}
+
+.block {
+    flex: 1;
+  
+    background: #24bd87;
+    margin: 15px;
+    border-radius: 7px;
+    flex: 0 0 auto;
+    color: white;
+    font-size: 15px;
+}
+
+.block p {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px 15px;
+}
+.block p label{
+    padding: 0 5px;
+}
