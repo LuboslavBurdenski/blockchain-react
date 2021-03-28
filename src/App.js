@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import './App.css';
 import Blockchain from './Blockchain/Blockchain';
-import { demoCoin, CryptoBlock } from './Blockchain/blockchainClass';
+import { demoCoin, CryptoBlock } from './Blockchain/blockchainService';
 
 function App() {
   const [sender, setSender] = useState('');
@@ -25,7 +25,7 @@ function App() {
   return (
     <section className="App">
 
-      <form className="App-form" onSubmit={e => { handleSubmit(e) }}>
+      <form className="App-form" onSubmit={handleSubmit}>
         <label htmlFor='sender'>sender</label>
         <input
           value={sender}
@@ -52,7 +52,7 @@ function App() {
           id='quantity' />
         <button className='Add-block'>add block</button>
       </form>
-     
+
       <Blockchain data={blocks} />
 
     </section>

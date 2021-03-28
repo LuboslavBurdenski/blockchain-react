@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import styles from './Block.module.css';
-import { demoCoin } from '../blockchainClass';
+import { demoCoin } from '../blockchainService';
 function Block(props) {
     const [allValues, setAllValues] = useState({
         blockIndex: props.blockIndex,
@@ -11,15 +11,10 @@ function Block(props) {
     const handleChange = (e) => {
         setAllValues({ ...allValues, [e.target.name]: Number(e.target.value) });
         demoCoin.blockchain[props.blockIndex].data.quantity = Number(e.target.value);
+        props.validation(demoCoin.checkChainValidity());
     }
 
-    useEffect(() => {
-        if (typeof demoCoin.checkChainValidity() === Number) {
-
-        }
-    });
-
-    return <article className={styles.block}>
+    return <article style={{ background: props.background }} className={styles.block}>
         <p>
             <label htmlFor='blockIndex'>block</label>
             <input name='blockIndex' id='blockIndex' onChange={handleChange} value={allValues.blockIndex}></input>

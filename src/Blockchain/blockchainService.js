@@ -5,11 +5,11 @@ class CryptoBlock {
         this.timestamp = timestamp;
         this.data = data;
         this.precedingHash = precedingHash;
-        this.hash = this.computeHash();
+        this.hash = this.calculateHash();
         this.nonce = 0;
     }
 
-    computeHash(blockIndex) {
+    calculateHash(blockIndex) {
         return SHA256(blockIndex + this.precedingHash + this.timestamp + JSON.stringify(this.data) + this.nonce)
             .toString();
     }
@@ -18,7 +18,7 @@ class CryptoBlock {
         this.blockIndex = blockIndex;
         while (this.hash.substring(0, difficulty) !== Array(difficulty + 1).join("0")) {
             this.nonce++;
-            this.hash = this.computeHash();
+            this.hash = this.calculateHash();
         }
         return this.nonce;
     }
@@ -36,7 +36,7 @@ class CryptoBlockchain {
         return this.blockchain[this.blockchain.length - 1];
     }
     addNewBlock(newBlock) {
-        if(!newBlock.data.quantity) newBlock.data.quantity = 0;
+        if (!newBlock.data.quantity) newBlock.data.quantity = 0;
         newBlock.precedingHash = this.obtainLatestBlock().hash;
         newBlock.proofOfWork(this.difficulty, this.blockchain.length);
         this.blockchain.push(newBlock);
@@ -45,8 +45,9 @@ class CryptoBlockchain {
         for (let i = 1; i < this.blockchain.length; i++) {
             const currentBlock = this.blockchain[i];
             const precedingBlock = this.blockchain[i - 1];
-            if (currentBlock.hash !== currentBlock.computeHash()) return i;
-            if (currentBlock.precedingHash !== precedingBlock.hash) return i;
+            const checkCurrentHash = currentBlock.calculateHash();
+            if (currentBlock.hash !== checkCurrentHash) { return [i, checkCurrentHash] }
+            if (currentBlock.precedingHash !== precedingBlock.hash) { return [i, precedingBlock.hash] }
         }
         return true;
     }
