@@ -20,6 +20,9 @@ function App() {
     demoCoin.addNewBlock(new CryptoBlock(new Date(), { sender, recipient, quantity: Number(quantity) }));
     let newElement = demoCoin.obtainLatestBlock();
     setBlocks(arr => [...arr, newElement]);
+    setSender('');
+    setRecipient('');
+    setQuantity('');
   }
 
   return (

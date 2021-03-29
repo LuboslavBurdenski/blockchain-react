@@ -3,11 +3,9 @@ import styles from './Block.module.css';
 import { demoCoin } from '../blockchainService';
 
 function Block(props) {
-
     const [quantity, setQuantity] = useState(((props.block.data.quantity === undefined) ? '' : props.block.data.quantity))
 
     const handleChange = (e) => {
-
         setQuantity(Number(e.target.value));
         demoCoin.blockchain[props.block.blockIndex].data.quantity = Number(e.target.value);
         let check = demoCoin.checkChainValidity();
@@ -56,14 +54,15 @@ function Block(props) {
         </p>
 
         <button
-            className={styles.mine}
-            onClick={mine}
-        >
-            mine
-        </button>
+            disabled={props.block.blockIndex === 0}
+            style={{
+                background: props.block.blockIndex === 0 ? '#cfcfcf' : '#b34d63',
+                cursor: props.block.blockIndex === 0 ? 'not-allowed' : 'pointer'
+            }}
+            className={styles.mine} onClick={mine} >
+            mine</button>
 
     </article >
-
 }
 
 export default Block;
