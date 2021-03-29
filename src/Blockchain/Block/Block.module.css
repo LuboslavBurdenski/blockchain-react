@@ -1,10 +1,11 @@
 .block {
-   
     margin: 15px;
     border-radius: 7px;
     flex: 0 0 auto;
     color: white;
     font-size: 15px;
+    align-items: center;
+    text-align: center;
 }
 
 .block p {
@@ -14,6 +15,20 @@
     justify-content: space-between;
     padding: 5px 15px;
 }
+
 .block p label{
     padding: 0 5px;
+}
+
+.mine{
+    width: 100px;
+    margin-top: 1%;
+    margin-bottom: 1%;
+    background: #b34d63;
+    border-radius: 7px;
+    border: 0;
+    padding: 5px;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
 }

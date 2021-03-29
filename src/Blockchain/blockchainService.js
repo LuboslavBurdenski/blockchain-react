@@ -27,7 +27,7 @@ class CryptoBlock {
 class CryptoBlockchain {
     constructor() {
         this.blockchain = [this.startGenesisBlock()];
-        this.difficulty = 1;
+        this.difficulty = 4;
     }
     startGenesisBlock() {
         return new CryptoBlock(new Date(), 0, "0", "0");
@@ -50,6 +50,19 @@ class CryptoBlockchain {
             if (currentBlock.precedingHash !== precedingBlock.hash) { return [i, precedingBlock.hash] }
         }
         return true;
+    }
+    mine(blockToMine, index) {
+        let newBlock = new CryptoBlock(new Date(), {
+            sender: blockToMine.data.sender,
+            recipient: blockToMine.data.recipient,
+            quantity: blockToMine.data.quantity
+        });
+
+        newBlock.precedingHash = this.blockchain[index - 1].hash;
+        newBlock.proofOfWork(this.difficulty, index);
+        this.blockchain[index] = newBlock;
+
+        return newBlock;
     }
 
 }

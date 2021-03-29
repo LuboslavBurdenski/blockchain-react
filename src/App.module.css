@@ -2,7 +2,7 @@
   text-align: center;
 }
 
-.App-form {
+.appForm {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -10,14 +10,14 @@
   color: white;
 }
 
-.Block-input {
+.blockInput {
   width: 250px;
   border-radius: 7px;
   border: 0;
   padding: 5px;
 }
 
-.Add-block {
+.addBlock {
   width: 200px;
   margin-top: 1%;
   background: #24bd87;
@@ -26,5 +26,6 @@
   padding: 5px;
   color: white;
   font-weight: 600;
+  cursor: pointer;
 }
 
